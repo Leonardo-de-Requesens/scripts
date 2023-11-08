@@ -1,4 +1,5 @@
 #!/bin/bash
+# I use this as a function in my .zshrc
 
 # This is heavily inspired by thePrimeagen tmux-sessionizer
 # So I tried to call this from inside nvim but couldn't find it so
