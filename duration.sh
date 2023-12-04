@@ -5,7 +5,7 @@ total_minutes=0
 total_seconds=0
 
 for file in *.mp4; do
-    duration=$(ffmpeg -hide_banner -i $file 2>&1 | grep Duration | cut -d ',' -f1 | awk '{print $2}')
+    duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 -sexagesimal $file)
     IFS=':' read -r hours minutes seconds <<< $duration
 
     ((total_hours+=hours))
