@@ -5,13 +5,13 @@ total_minutes=0
 total_seconds=0
 
 for file in *.mp4; do
-    duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 -sexagesimal $file)
-    IFS=':' read -r hours minutes seconds <<< $duration
+	duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 -sexagesimal $file)
+	IFS=':' read -r hours minutes seconds <<< $duration
 
-    ((total_hours+=hours))
-    ((total_minutes+=minutes))
-    seconds=$(bc <<< "$seconds / 1")
-    ((total_seconds+=seconds))
+	((total_hours+=hours))
+	((total_minutes+=minutes))
+	seconds=$(bc <<< "$seconds / 1")
+	((total_seconds+=seconds))
 done
 
 ((total_minutes+=total_seconds / 60))

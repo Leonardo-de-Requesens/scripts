@@ -1,4 +1,5 @@
-# I use this as a function in my .zshrc
+#!/bin/bash
+# I use this as a function in my zshrc
 
 separation="============"
 echo "Starting auto fixup!"
@@ -31,11 +32,11 @@ if git commit --fixup=${selectedCommit} 2>&1 1>/dev/null; then
 	echo "Everything went well, rebasing..."
 else
 	echo "Finished with issue, have you added files to git?"
-	exit 1
+	return 1
 fi
 
 totalCommits=$(git rev-list --count HEAD) # Will this work for branches?
-if [ "$totalCommits" -ge 3 ]; then
+if (( "$totalCommits" >= 4 )); then
 	git rebase -i --autosquash HEAD~3
 else
 	git rebase -i --autosquash --root
