@@ -7,7 +7,10 @@ total_minutes=0
 total_seconds=0
 
 for file in *{.mp4,.m4a}; do
-	duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 -sexagesimal $file)
+	duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 -sexagesimal $file 2>/dev/null)
+	if [ $? -ne 0 ]; then
+		continue
+	fi
 	IFS=':' read -r hours minutes seconds <<< $duration
 
 	((total_hours+=hours))
